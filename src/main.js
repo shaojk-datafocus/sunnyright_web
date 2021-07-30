@@ -1,5 +1,17 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import installElementPlus from './plugins/element'
+import axios from 'axios'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+installElementPlus(app)
+app.config.globalProperties.$axios = axios
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})
+app.use(router).mount('#app')

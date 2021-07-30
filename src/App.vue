@@ -1,30 +1,71 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <el-container>
+    <el-header v-if="$route.meta.hideHeader==null|!$route.meta.hideHeader">
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-app"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b" router>
+        <!-- <li id="logo">ERP扩展系统</li> -->
+        <el-menu-item index="/home">处理中心</el-menu-item>
+        <el-menu-item index="/inventory">库存查询</el-menu-item>
+        <el-menu-item index="/purchase">采购单</el-menu-item>
+      </el-menu>
+    </el-header>
+    <el-container>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  components: {},
+  data () {
+    return {
+      activeIndex: '/inventory'
+    }
+  },
+  methods: {
+    handleSelect (key, keyPath) {
+      console.log(key, keyPath)
+    }
+  }
+}
+</script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+}
+body {
+  margin: 0;
 }
 
-#nav {
-  padding: 30px;
+.el-header {
+  padding: 0 !important;
+}
+#logo {
+  float: left;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 15px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.el-menu-app {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  float: left;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.el-menu-app::-webkit-scrollbar {
+  display:none
 }
 </style>

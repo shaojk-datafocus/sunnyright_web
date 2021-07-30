@@ -1,24 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Inventory from '../views/Inventory.vue'
+import Purchase from '../views/Purchase.vue'
+import PurchaseExport from '../views/PurchaseExport.vue'
+// import Home from '../views/Home.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  { path: '/', redirect: '/inventory' },
+  { path: '/inventory', component: Inventory, meta: { title: 'ERP - 库存查询' } },
+  { path: '/purchase', component: Purchase, meta: { title: 'ERP - 采购单' } },
+  { path: '/purchase/export', component: PurchaseExport, meta: { hideHeader: true, title: 'ERP - 导出采购单' } }
+  // { path: '/purchase/export', component: PurchaseExport }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 
