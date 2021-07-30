@@ -41,10 +41,12 @@
 export default {
   data () {
     return {
+      purchaseExportData: []
     }
   },
   created () {
-    console.log(this.$route)
+    this.purchaseExportData = JSON.parse(localStorage.getItem('purchaseExportData'))
+    console.log(this.purchaseExportData)
   },
   methods: {
     print () {

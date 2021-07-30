@@ -25,7 +25,7 @@
         </el-form>
       </el-col>
     </el-row>
-    <el-table :data="tableData" style="width: 100%" size="mini" ref="multipleTable" @row-click="toggleSelection">
+    <el-table :data="tableData" style="width: 100%" size="mini" ref="multipleTable" @row-click="toggleSelection" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column fixed prop="code" label="采购订单编号" sortable width="150"></el-table-column>
       <el-table-column prop="supplier_name" label="供应商名称" sortable></el-table-column>
@@ -80,6 +80,7 @@ export default {
       form: {},
       createDate: [],
       approveDate: [],
+      multipleSelection: [],
       shortcuts: [{
         text: '今天',
         value: [new Date().setHours(0, 0, 0, 0), new Date()]
@@ -96,7 +97,8 @@ export default {
       this.total = res.data.total
     },
     exportPurchase () {
-      // this.$router.push('/purchase/export')
+      console.log(this.multipleSelection)
+      localStorage.setItem('purchaseExportData', JSON.stringify(this.multipleSelection))
       const routeData = this.$router.resolve({ path: '/purchase/export', target: '_target' })
       window.open(routeData.href, '_blank')
     },
@@ -104,14 +106,12 @@ export default {
       rows.splice(index, 1)
     },
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
       this.pageSize = val
       this.queryPurchase()
     },
     handleCurrentChange (val) {
       this.page = val
       this.queryPurchase()
-      console.log(`当前页: ${val}`)
     },
     toggleSelection (row, column, event) {
       if (column.no <= 2) {
@@ -121,6 +121,9 @@ export default {
           this.$refs.multipleTable.clearSelection()
         }
       }
+    },
+    handleSelectionChange (val) {
+      this.multipleSelection = val
     }
   }
 }
