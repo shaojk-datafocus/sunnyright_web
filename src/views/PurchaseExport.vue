@@ -147,18 +147,17 @@ export default {
       const second = date.getSeconds()
 
       // const data = document.getElementsByClassName('table')[0].innerText.replace(/\t/g, '\t,').replace(/\n\n/g, '\n')
-      const purchaseData = ['商品编号', '规格编号', '规格', '数量', '可销售数量', '供应商货号', '供应商\n']
+      let purchaseData = '商品编号,规格编号,规格,数量,可销售数量,供应商货号,供应商\n'
       this.tableData.forEach(item => {
-        purchaseData.push(item.item_code)
-        purchaseData.push(item.sku_code)
-        purchaseData.push(item.sku_name)
-        purchaseData.push(item.qty)
-        purchaseData.push(item.salable_qty)
-        purchaseData.push(item.supplier_outerid)
-        purchaseData.push(item.supplier_name + '\n') // 深拷贝item
+        purchaseData += item.item_code + ','
+        purchaseData += item.sku_code + ','
+        purchaseData += item.sku_name + ','
+        purchaseData += item.qty + ','
+        purchaseData += item.salable_qty + ','
+        purchaseData += item.supplier_outerid + ','
+        purchaseData += item.supplier_name + '\n' // 深拷贝item
       })
-      console.log(purchaseData)
-      const blob = new Blob(['\ufeff' + purchaseData], { type: 'text/csv,charset=GBK' })
+      const blob = new Blob(['\ufeff' + purchaseData], { type: 'text/csv,charset=utf-8' })
       const csvUrl = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.download = '采购单' + year + '-' + month + '-' + day + ' ' + hour + '-' + minute + '-' + second + '.csv'

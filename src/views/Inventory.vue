@@ -50,14 +50,9 @@ export default {
     }
   },
   mounted () {
-    console.log(document.body.clientWidth)
     this.windowWidth = document.body.clientWidth
-    console.log(window.screenWidth)
     window.onresize = () => {
       return (() => {
-        window.screenWidth = 
-        that.screenWidth = window.screenWidth
-        console.log(that.screenWidth)
         this.windowWidth = document.body.clientWidth
       })()
     }

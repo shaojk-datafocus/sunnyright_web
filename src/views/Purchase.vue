@@ -76,7 +76,7 @@ export default {
       tableData: [],
       total: 0,
       page: 1,
-      pageSize: 10,
+      pageSize: 50,
       itemCode: null,
       cancel: 0,
       form: {},
