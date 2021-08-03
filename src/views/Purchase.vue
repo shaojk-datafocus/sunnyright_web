@@ -1,27 +1,29 @@
 <template>
   <div>
     <el-row :gutter="10" style="margin-bottom: 15px">
-      <el-col :span="2"><span style="font-weight:800 font-size:20px">采购单</span></el-col>
-      <el-col :span="22">
+      <el-col :lg="2" :xs="24"><span style="font-weight:800 font-size:20px">采购单</span></el-col>
+      <el-col :lg="22" :xs="24">
         <el-form>
-          <el-col :span="10">
+          <el-col :lg="10" :xs="24">
             <el-form-item label="创建时间">
               <el-date-picker v-model="createDate" type="datetimerange" :shortcuts="shortcuts" range-separator="至"
                 start-placeholder="开始创建时间" end-placeholder="结束创建时间">
               </el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col :span="10">
+          <el-col :lg="10" :xs="24">
             <el-form-item label="审核时间">
               <el-date-picker v-model="approveDate" type="datetimerange" :shortcuts="shortcuts" range-separator="至"
                 start-placeholder="开始审核时间" end-placeholder="结束审核时间">
               </el-date-picker>
             </el-form-item>
           </el-col>
-          <el-form-item>
-            <el-button type="primary" @click="queryPurchase">查询</el-button>
-            <el-button @click="exportPurchase">导出采购单</el-button>
-          </el-form-item>
+          <!-- <el-col :lg="4" :xs="24"> -->
+            <el-form-item>
+              <el-button type="primary" @click="queryPurchase">查询</el-button>
+              <el-button @click="exportPurchase">导出采购单</el-button>
+            </el-form-item>
+          <!-- </el-col> -->
         </el-form>
       </el-col>
     </el-row>

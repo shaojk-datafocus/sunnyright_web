@@ -29,12 +29,24 @@ export default {
   components: {},
   data () {
     return {
-      activeIndex: '/inventory'
+      activeIndex: null
+    }
+  },
+  created () {
+    const activeIndex = localStorage.getItem('activeIndex')
+    if (activeIndex) {
+      console.log(activeIndex)
+      this.activeIndex = activeIndex
+    } else {
+      console.log(false)
     }
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+      console.log(this.activeIndex)
+      this.activeIndex = key
+      localStorage.setItem('activeIndex', key)
     }
   }
 }
